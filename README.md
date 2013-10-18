@@ -11,7 +11,8 @@ Matt Weimer's <a href="https://github.com/mweimer/Json.NetMF">Json.MF</a> implem
 Requirements
 ------------
 
-Microsoft .NET Micro Framework 4.2 or higher
+Microsoft .NET Micro Framework 4.2 or higher.
+The example tested with Gadgeteer Spider, wifi rs21 and button modules.
 
 
 Example Gadgeteer application
@@ -20,9 +21,7 @@ Example Gadgeteer application
 ```csharp
 using System;
 using System.Collections;
-
 using System.Threading;
-
 using Microsoft.SPOT;
 using Microsoft.SPOT.Presentation;
 using Microsoft.SPOT.Presentation.Controls;
@@ -32,6 +31,7 @@ using Microsoft.SPOT.Touch;
 using Gadgeteer.Networking;
 using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
+using GHI.Premium.Net;
 
 using SocketIO.NetMF;
 
@@ -111,12 +111,19 @@ namespace ExampleGadgeteerSocketIOApp
                 Debug.Print("interface was not open");
                 wifi.Interface.Open();
             }
-            wifi.Interface.WirelessConnectivityChanged += new GHI.Premium.Net.WiFiRS9110.WirelessConnectivityChangedEventHandler(Interface_WirelessConnectivityChanged);
+            
+            wifi.Interface.WirelessConnectivityChanged += 
+                new WiFiRS9110.WirelessConnectivityChangedEventHandler((s, e) => 
+            {
+                Debug.Print("wifi conn changed!");
+                if (e.IsConnected) { Debug.Print("WIFI (" + wlanName + ") connected!"); }
+                else { Debug.Print("WIFI (" + wlanName + ") disconnected.."); }
+            });
 
             wifi.DebugPrintEnabled = true;
             wifi.UseDHCP();
 
-            GHI.Premium.Net.WiFiNetworkInfo info = new GHI.Premium.Net.WiFiNetworkInfo();
+            GHI.Premium.Net.WiFiNetworkInfo info = new WiFiNetworkInfo();
             info.SSID = wlanName;
             info.SecMode = GHI.Premium.Net.SecurityMode.WPA2;
             info.networkType = GHI.Premium.Net.NetworkType.AccessPoint;
@@ -125,18 +132,6 @@ namespace ExampleGadgeteerSocketIOApp
             wifi.UseThisNetworkInterface();
         }
 
-        void Interface_WirelessConnectivityChanged(object sender, GHI.Premium.Net.WiFiRS9110.WirelessConnectivityEventArgs e)
-        {
-            Debug.Print("wifi conn changed!");
-            if (e.IsConnected)
-            {
-                Debug.Print("WIFI (" + wlanName + ") connected!");
-            }
-            else
-            {
-                Debug.Print("WIFI (" + wlanName + ") disconnected..");
-            }
-        }
     }
 }
 ```
