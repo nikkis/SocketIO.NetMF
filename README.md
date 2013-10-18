@@ -9,24 +9,40 @@ Matt Weimer's <a href="https://github.com/mweimer/Json.NetMF">Json.MF</a> implem
 
 
 Requirements
-==============
+============
 
 Microsoft .NET Micro Framework 4.2 or higher
 
 
 Example Gadgeteer application
-==============
-
+=============================
 
 <code>
-    
-    class SocketIOClient : SocketIO 
-    {
-        
-        override public void onConnect() 
-        { 
-            Debug.Print("SocketIO connected");
+using System;
+using System.Collections;
+using System.Threading;
+using Microsoft.SPOT;
+using Microsoft.SPOT.Presentation;
+using Microsoft.SPOT.Presentation.Controls;
+using Microsoft.SPOT.Presentation.Media;
+using Microsoft.SPOT.Touch;
 
+using Gadgeteer.Networking;
+using GT = Gadgeteer;
+using GTM = Gadgeteer.Modules;
+
+using SocketIO.NetMF;
+
+namespace ExampleGadgeteerSocketIOApp
+{
+
+    class MySocketIOClient : SocketIOClient
+    {
+
+        override public void onConnect()
+        {
+            Debug.Print("SocketIO connected");
+            
             // after connected, client can start emiting events, e.g. login event with
             emit("login", new ArrayList() { "my_identity_goes_here" });
 
@@ -45,15 +61,15 @@ Example Gadgeteer application
     public partial class Program
     {
         // host server details
-        private static string _host = "localhost";
+        private static string _host = "192.168.1.66";
         private static string _port = "8080";
 
         // instance of socketIO client
-        private SocketIOClient socketIOClient = null;
+        private MySocketIOClient socketIOClient = null;
 
         // WIFI details
-        private static string wlanName = "my_ssid";
-        private static string wlanPassword = "my_passwd";
+        private static string wlanName = "wifi_ssid";
+        private static string wlanPassword = "wifi_passwd";
 
 
 
@@ -65,15 +81,16 @@ Example Gadgeteer application
             initWifiConnection();
 
             // create new socketIO client
-            socketIOClient = new SocketIOClient();
+            socketIOClient = new MySocketIOClient();
 
             // connect to socketIO server when button is pressed
-            button.ButtonPressed += new GTM.GHIElectronics.Button.ButtonEventHandler((o,s) => {
+            button.ButtonPressed += new GTM.GHIElectronics.Button.ButtonEventHandler((o, s) =>
+            {
                 socketIOClient.connect(_host, _port);
                 Debug.Print("button pressed!");
             });
 
-            
+
             Debug.Print("Program Started");
         }
 
@@ -111,13 +128,13 @@ Example Gadgeteer application
             Debug.Print("wifi conn changed!");
             if (e.IsConnected)
             {
-                Debug.Print("WIFI ("+wlanName+") connected!");
+                Debug.Print("WIFI (" + wlanName + ") connected!");
             }
             else
             {
-                Debug.Print("WIFI ("+wlanName+") disconnected..");
+                Debug.Print("WIFI (" + wlanName + ") disconnected..");
             }
         }
     }
-
+}
 </code>

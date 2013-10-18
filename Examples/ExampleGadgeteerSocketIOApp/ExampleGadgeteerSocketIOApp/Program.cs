@@ -116,10 +116,4 @@ namespace ExampleGadgeteerSocketIOApp
             }
         }
     }
-
-
-
-
-
-
 }
