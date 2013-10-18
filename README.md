@@ -57,7 +57,10 @@ namespace ExampleGadgeteerSocketIOApp
         override public void onHeartbeat() { Debug.Print("got heartbeat"); }
         override public void onMessage(string message) { Debug.Print("got messag: " + message); }
         override public void onJsonMessage(Hashtable jsonObject) { Debug.Print("got json object"); }
-        override public void onEvent(string name, ArrayList args) { Debug.Print("got event: " + name); }
+        override public void onEvent(string name, ArrayList args) 
+        { 
+            Debug.Print("got event: " + name); 
+        }
 
         // Handle error cases
         override public void onError(string reason) { throw new Exception(reason); }
