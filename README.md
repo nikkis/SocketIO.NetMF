@@ -17,9 +17,12 @@ Microsoft .NET Micro Framework 4.2 or higher
 Example Gadgeteer application
 -----------------------------
 
+```csharp
 using System;
 using System.Collections;
+
 using System.Threading;
+
 using Microsoft.SPOT;
 using Microsoft.SPOT.Presentation;
 using Microsoft.SPOT.Presentation.Controls;
@@ -136,4 +139,4 @@ namespace ExampleGadgeteerSocketIOApp
         }
     }
 }
-
+```
