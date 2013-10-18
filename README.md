@@ -9,15 +9,14 @@ Matt Weimer's <a href="https://github.com/mweimer/Json.NetMF">Json.MF</a> implem
 
 
 Requirements
-============
+------------
 
 Microsoft .NET Micro Framework 4.2 or higher
 
 
 Example Gadgeteer application
-=============================
+-----------------------------
 
-<code>
 using System;
 using System.Collections;
 using System.Threading;
@@ -137,4 +136,4 @@ namespace ExampleGadgeteerSocketIOApp
         }
     }
 }
-</code>
+
