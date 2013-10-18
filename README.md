@@ -11,7 +11,7 @@ Matt Weimer's <a href="https://github.com/mweimer/Json.NetMF">Json.MF</a> implem
 Requirements
 ------------
 
-Microsoft .NET Micro Framework 4.2 or higher.
+Microsoft .NET Micro Framework 4.2 or higher.  
 The example tested with Gadgeteer Spider, wifi rs21 and button modules.
 
 
@@ -38,6 +38,7 @@ using SocketIO.NetMF;
 namespace ExampleGadgeteerSocketIOApp
 {
 
+    // TODO: add you own handlers here
     class MySocketIOClient : SocketIOClient
     {
 
@@ -48,6 +49,8 @@ namespace ExampleGadgeteerSocketIOApp
             // after connected, client can start emiting events, e.g. login event with
             emit("login", new ArrayList() { "my_identity_goes_here" });
 
+            // Other emit choises are: emit(Hashtable jsonObject) and emit(string str)
+
         }
 
         override public void onDisconnect() { Debug.Print("1 disconnected"); }
@@ -56,9 +59,12 @@ namespace ExampleGadgeteerSocketIOApp
         override public void onJsonMessage(Hashtable jsonObject) { Debug.Print("got json object"); }
         override public void onEvent(string name, ArrayList args) { Debug.Print("got event: " + name); }
 
+        // Handle error cases
         override public void onError(string reason) { throw new Exception(reason); }
 
     }
+
+
 
     public partial class Program
     {
@@ -99,6 +105,8 @@ namespace ExampleGadgeteerSocketIOApp
 
 
 
+
+        // Just helper to initialize WIFI connection, nothing to do with SocketIO
         void initWifiConnection()
         {
             Debug.Print("connecting to: " + wlanName);
@@ -131,7 +139,6 @@ namespace ExampleGadgeteerSocketIOApp
             wifi.Interface.Join(info, wlanPassword);
             wifi.UseThisNetworkInterface();
         }
-
     }
 }
 ```
