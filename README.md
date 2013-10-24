@@ -63,7 +63,7 @@ namespace ExampleGadgeteerSocketIOApp
 
 
         // other reserved messages and event types
-        override public void onDisconnect() { Debug.Print("1 disconnected"); }
+        override public void onDisconnect() { Debug.Print("disconnected"); }
         override public void onHeartbeat() { Debug.Print("got heartbeat"); }
         override public void onMessage(string message) { Debug.Print("got message: " + message); }
         override public void onJsonMessage(Hashtable jsonObject) { Debug.Print("got json obj"); }
