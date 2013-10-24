@@ -46,20 +46,23 @@ namespace ExampleGadgeteerSocketIOApp
         {
             Debug.Print("SocketIO connected");
             
-            // after connected, client can start emiting events, e.g. login event with
+            // after connecting, client can start emiting events, e.g. login event:
             emit("login", new ArrayList() { "my_identity_goes_here" });
 
-            // Other emit choises are: emit(Hashtable jsonObject) and emit(string str)
+            // Other emit choises are: 
+            //   emit(Hashtable jsonObject); 
+            //   emit(string str);
 
         }
 
+        // handle your own specified event types here
         override public void onEvent(string name, ArrayList args) 
         { 
             Debug.Print("got event: " + name); 
         }
 
 
-        // other messages and event types
+        // other reserved messages and event types
         override public void onDisconnect() { Debug.Print("1 disconnected"); }
         override public void onHeartbeat() { Debug.Print("got heartbeat"); }
         override public void onMessage(string message) { Debug.Print("got message: " + message); }
