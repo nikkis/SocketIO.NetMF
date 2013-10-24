@@ -7,12 +7,14 @@ SocketIO implementation for NetMF and .NET Gadgeteer.
 Based on jasdev55's <a href="http://jdiwebsocketclient.codeplex.com/">JDI WebSocket Client </a> and on
 Matt Weimer's <a href="https://github.com/mweimer/Json.NetMF">Json.MF</a> implementation
 
+Works at least with <a href="http://nodejs.org">Node.js</a> server with <a href="http://socket.io">socket.io module</a>.
+
 
 Requirements
 ------------
 
 Microsoft .NET Micro Framework 4.2 or higher.  
-The example tested with Gadgeteer Spider, wifi rs21 and button modules.
+The example was tested with Gadgeteer Spider, wifi rs21 and button modules and <a href="http://nodejs.org">Node.js</a> server with <a href="http://socket.io">socket.io module</a>.
 
 
 Example Gadgeteer application
